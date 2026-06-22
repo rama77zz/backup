@@ -7,6 +7,10 @@
       "config": {
         "maxDuration": 10
       }
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -16,15 +20,15 @@
     },
     {
       "src": "/chat.html",
-      "dest": "/chat.html"
+      "dest": "/public/chat.html"
     },
     {
       "src": "/",
-      "dest": "/index.html"
+      "dest": "/public/index.html"
     },
     {
       "src": "/(.*\\..*)",
-      "dest": "/$1"
+      "dest": "/public/$1"
     }
   ]
 }
