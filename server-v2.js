@@ -355,4 +355,27 @@ app.post('/api/datasets/upload', upload.single('document'), async (req, res) => 
 // VERCEL FIX: Export handler, BUKAN app.listen()
 // app.listen() menyebabkan crash di serverless environment Vercel
 // ====================================================================
+
+// ====================================================================
+// DEBUG ENDPOINT SEMENTARA - hapus setelah masalah ditemukan
+// ====================================================================
+app.get('/api/debug', async (req, res) => {
+    let datasetError = null;
+    let ragError = null;
+    
+    try { require('./lib/dataset'); } catch(e) { datasetError = e.message; }
+    try { require('./lib/rag'); } catch(e) { ragError = e.message; }
+    
+    res.json({
+        ragEngine: !!ragEngine,
+        datasetManager: !!datasetManager,
+        blobToken: !!process.env.BLOB_READ_WRITE_TOKEN,
+        groqKey: !!process.env.GROQ_API_KEY,
+        datasetModuleError: datasetError,
+        ragModuleError: ragError
+    });
+});
+
 module.exports = app;
+
+// Patch: tambah debug endpoint (hapus setelah masalah ditemukan)
