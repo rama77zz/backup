@@ -332,8 +332,9 @@ app.post('/api/datasets/upload', upload.single('document'), async (req, res) => 
 
         const cleanName = req.file.originalname.replace(/\s+/g, '_');
 
+        // VERCEL FIX: Blob store private → gunakan access: 'private'
         const blob = await put(`datasets/${cleanName}`, req.file.buffer, {
-            access: 'public',
+            access: 'private',
             token: tokenBlob
         });
 
