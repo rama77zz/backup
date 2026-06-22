@@ -3,14 +3,12 @@
   "builds": [
     {
       "src": "server-v2.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "maxDuration": 10
+      }
     }
   ],
-  "functions": {
-    "server-v2.js": {
-      "maxDuration": 10
-    }
-  },
   "routes": [
     {
       "src": "/api/(.*)",
